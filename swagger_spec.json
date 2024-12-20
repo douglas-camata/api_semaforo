@@ -1,0 +1,148 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Semaforo",
+        "description": "API gerenciar dados do APP que controla o semáforo. Link do app: https://snack.expo.dev/@douglas.camata/app-semaforo---projeto-1-sem-2024",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:5000",
+            "description": "Servidor Local"
+        },
+        {
+            "url": "https://api-semaforo.vercel.app",
+            "description": "Servidor De Testes"
+        }
+    ],
+    "paths": {
+        "/obterDados": {
+            "get": {
+                "tags": [
+                    "dados"
+                ],
+                "summary": "Obter dados das variáveis",
+                "description": "Recebe os valores das variáveis do servidor",
+                "responses": {
+                    "200": {
+                        "description": "Variáveis recebidas com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "content": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro no servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Detalhes do erro"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/atualizarDados": {
+            "put": {
+                "tags": [
+                    "dados"
+                ],
+                "summary": "Atualizar dados",
+                "description": "Envia os dados para serem atualizados nas variáveis do servidor",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tempo_verde_via_1": {
+                                        "type": "string",
+                                        "example": "3000"
+                                    },
+                                    "tempo_vermelho_via_1": {
+                                        "type": "string",
+                                        "example": "2500"
+                                    },
+                                    "amarelo_piscante_via_1": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "tempo_verde_via_2": {
+                                        "type": "string",
+                                        "example": "3000"
+                                    },
+                                    "tempo_vermelho_via_2": {
+                                        "type": "string",
+                                        "example": "2500"
+                                    },
+                                    "amarelo_piscante_via_2": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "iluminacao_ligada": {
+                                        "type": "boolean",
+                                        "example": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Dados atualizados com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Dados atualiados"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro no servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Detalhes do erro"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
